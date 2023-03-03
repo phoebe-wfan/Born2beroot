@@ -1,8 +1,10 @@
 # Evaluation-MandatoryPart-[Project overview]
 
 ## How a virtual machine works.
-Virtual machines are made possible through virtualization technology.
-Virtualization is the process of creating a software-based, or "virtual" version of a computer, with dedicated amounts of CPU, memory, and storage that are "borrowed" from a physical host computer—such as your personal computer— and/or a remote server—such as a server in a cloud provider's datacenter. 
+VM working through "Virtualization" technology. 
+Virtualization uses software to simulate virtual hardware that allows 
+VMs to run on a single host machine.
+(borrowed CPU, memory, and storage from a physical host computer, such as your personal computer) 
 
 ## Their choice of operating system
 Debian
@@ -11,6 +13,7 @@ Debian
 ### Audience
 - Debian: Operating system for individuals
 - Rocky: HPC Managers, Linux Software Engineers, C-Suite Executive
+*Debian is highly recommended if you are new to system administration.
 
 ## The purpose of virtual machines.
 The big draw of virtualization is to operate multiple displays and even systems — Linux and Windows, for example — from the same console. his allows users to toggle among applications regardless of their OS. And resource consumption with VMware can be remarkably lower than resource consumption with multiple hardware-based systems.
@@ -92,7 +95,7 @@ sudo addgroup evaluating
 
 - Add the new user [newuser] to group [evaluating].
 ```
-sudo adduser name_user evaluating
+sudo adduser newuser evaluating
 ```
 
 - Check that the [newuser] belongs to group [evaluating].
@@ -149,3 +152,119 @@ lsblk
 LVM (Logical Volume Manager) is an abstraction layer between a storage device and a file system. By using LVM, we can expand the storage of any partition, we can do this with available storage located on different physical disks (which we cannot do with traditional partitions).
 
 # Evaluation-MandatoryPart-[SUDO]
+
+## Check that the "sudo" program is properly installed on the virtual machine.
+```
+which sudo
+```
+
+## What is sudo.
+super user do
+
+- Add your new user [newuser] to [sudo] group.
+```
+sudo adduser newuser sudo
+```
+
+- Check that the [newuser] belongs to [sudo] group.
+```
+sudo getent group sudo
+```
+
+- Show you the implementation of the rules imposed by the subject.
+```
+cat /etc/sudoers.d/sudoconfig
+```
+```
+Defaults    passwd_tries=3 \\ 3 trise for password
+Defaults	badpass_message="Incorrect sudo password, you have total 3 tries."
+Defaults	logfile="/var/log/sudo/sudoconfig" \\ Log all sudo commands to /var/log/sudo/sudoconfig 把所有sudo命令记录到/var/log/sudo/sudoconfig
+Defaults	log_input,log_output \\ Archive all sudo inputs & outputs to /var/log/sudo/ 把所有sudo输入和输出存档到/var/log/sudo/
+Defaults	iolog_dir="/var/log/sudo"
+Defaults	requiretty \\ Require TTY 要求TTY
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin" \\ set sudo paths to ... 把sudo路径设置到这里
+```
+
+- *Test incorrect sudo password *
+```
+sudo ufw status
+```
+
+- *What is TTY? 
+"TTY" is an acronym for "teletype", which refers to a computer's terminal interface. When using the sudo command, you may see the -t option followed by a TTY number, for example -t 1.
+
+This option allows you to specify which terminal the sudo command should be run on. By default, the sudo command is run on the current terminal (the one you are currently on).
+
+- Verify that the "/var/log/sudo/" folder
+	(You should see a history of the commands used with sudo.Try to run a command via sudo. See if the file (s) in the "/var/log/sudo/" folder have been updated.)
+```
+cat /var/log/sudo/sudoconfig
+```
+```
+sudo ufw status
+```
+```
+cat /var/log/sudo/sudoconfig
+```
+
+# Evaluation-MandatoryPart-[UFW/Firewalld]
+
+## What is UFW and how it works.
+UFW (Uncomplicated Firewall) is a software application responsible for ensuring that the system administrator can manage iptables in a simple way. Once we have UFW installed, we can choose which ports we want to allow connections, and which ports we want to close. This will also be very useful with SSH.
+
+- Check that the UFW program is properly installed on the virtual machine
+```
+dpkg -s ufw
+```
+
+- Check that it is working properly.
+```
+sudo service ufw status
+```
+```
+sudo ufw status
+```
+
+- List the active rules in UFW (or Firewalld).A rule must exist for port 4242.
+```
+sudo ufw status numbered
+```
+
+- Add a new rule to open port 8080. Check that this one has been added by listing the active rules.
+add:
+```
+sudo ufw allow 8080
+```
+check:
+```
+sudo ufw status numbered
+```
+
+- Delete this new rule
+delete:
+```
+sudo ufw delete [rule nbr]
+```
+
+# Evaluation-MandatoryPart-[SSH]
+
+## What is SSH.
+Secure Shell (SSH) is a network protocol that allows you to remotely connect to a computer and send it commands remotely. It is commonly used to access remote servers or computers in a secure and encrypted manner, using an encrypted connection.
+
+- Check that the SSH service is properly installed on the virtual machine.
+```
+which ssh
+```
+
+- Check that it is working properly. Verify that the SSH service only uses port 4242.
+```
+sudo service ssh status
+```
+
+- The student being evaluated should help you use SSH in order to log in with the newly created user. To do this, you can use a key or a simple password. It will depend on the student being evaluated. 
+
+
+- Cannot use SSH with the "root" user as stated in the subject.
+```
+ssh -p 2222 root@localhost
+```
