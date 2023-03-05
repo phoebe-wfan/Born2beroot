@@ -185,18 +185,20 @@ Defaults	requiretty \\ Require TTY 要求TTY
 Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin" \\ set sudo paths to ... 把sudo路径设置到这里
 ```
 
-- *Test incorrect sudo password *
+- *Test incorrect sudo password
 ```
 sudo ufw status
 ```
 
-- *What is TTY? 
+- *What is TTY?
+
 "TTY" is an acronym for "teletype", which refers to a computer's terminal interface. When using the sudo command, you may see the -t option followed by a TTY number, for example -t 1.
 
 This option allows you to specify which terminal the sudo command should be run on. By default, the sudo command is run on the current terminal (the one you are currently on).
 
 - Verify that the "/var/log/sudo/" folder
-	(You should see a history of the commands used with sudo.Try to run a command via sudo. See if the file (s) in the "/var/log/sudo/" folder have been updated.)
+
+(You should see a history of the commands used with sudo.Try to run a command via sudo. See if the file (s) in the "/var/log/sudo/" folder have been updated.)
 ```
 cat /var/log/sudo/sudoconfig
 ```
@@ -261,8 +263,10 @@ which ssh
 sudo service ssh status
 ```
 
-- The student being evaluated should help you use SSH in order to log in with the newly created user. To do this, you can use a key or a simple password. It will depend on the student being evaluated. 
-
+- Use SSH in order to log in with the newly created user [newuser]. 
+```
+ssh -p 2222 newuser@localhost
+```
 
 - Cannot use SSH with the "root" user as stated in the subject.
 ```
