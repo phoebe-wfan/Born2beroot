@@ -111,7 +111,7 @@ hostname
 ```
 
 ## Modify this hostname by replacing the login with evaluator's, then restart the machine.
-- Modify the name.
+- Modify the name. 
 ```
 sudo vim /etc/hostname
 ```
@@ -119,7 +119,7 @@ sudo vim /etc/hostname
 evaluator42
 ```
 
-- Restart.
+- Restart. 
 ```
 sudo reboot
 ```
@@ -271,4 +271,9 @@ ssh -p 2222 newuser@localhost
 - Cannot use SSH with the "root" user as stated in the subject.
 ```
 ssh -p 2222 root@localhost
+```
+
+# *Power off (0s) [0秒关机]
+```
+sudo shutdown 0
 ```
