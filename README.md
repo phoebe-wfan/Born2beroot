@@ -1,3 +1,8 @@
+# *Evaluation-signature.txt
+```
+shasum Born2beRoot.vdi
+```
+
 # Evaluation-MandatoryPart-[Project overview]
 
 ## How a virtual machine works.
@@ -273,12 +278,7 @@ ssh -p 2222 newuser@localhost
 ssh -p 2222 root@localhost
 ```
 
-# *Power off (0s) [0秒关机]
-```
-sudo shutdown 0
-```
-
-# *Monitoring & Crontab 
+# Monitoring & Crontab 
 
 ## Monitoring
 ```
@@ -311,4 +311,9 @@ sudo crontab -u root -e
 - cat
 ```
 sudo crontab -u root -l
+```
+
+# *Power off (0s) [0秒关机]
+```
+sudo shutdown 0
 ```
