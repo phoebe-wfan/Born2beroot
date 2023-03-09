@@ -298,8 +298,9 @@ vim /home/monitoring.sh
 - The number of commands executed with the sudo program.
 
 ## Crontab
+- edit
 ```
-sudo crontab -u root -l
+sudo crontab -u root -e
 ```
 ```
 # m h  dom mon dow   command
@@ -307,4 +308,7 @@ sudo crontab -u root -l
 ```
 10 -> 1
 从10分钟一次变成1分钟一次
-
+- cat
+```
+sudo crontab -u root -l
+```
