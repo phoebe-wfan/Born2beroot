@@ -317,3 +317,18 @@ sudo crontab -u root -l
 ```
 sudo shutdown 0
 ```
+
+# *install oh my bash
+
+## 1. install git (for debian)
+```
+apt update
+```
+```
+apt install git
+```
+
+## 2. install oh my bash
+```
+bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+```
