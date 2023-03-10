@@ -77,7 +77,7 @@ sudo adduser newuser
 ```
 - Befor that we had better to show the [Strong Password Policy]:
 ```
-sudo vi /etc/login.defs
+sudo vim /etc/login.defs
 ```
 ```
 160 PASS_MAX_DAYS   30
@@ -86,7 +86,7 @@ sudo vi /etc/login.defs
 ```
 Set password to expire every 30 days, minimum number of days between password changes to 2 days, send user a warning message 7 days (defaults to 7 anyway) before password expiry.
 ```
-sudo vi /etc/pam.d/common-password
+sudo vim /etc/pam.d/common-password
 ```
 ```
 25 password        requisite                       pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root 
