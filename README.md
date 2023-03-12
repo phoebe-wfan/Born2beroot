@@ -28,6 +28,9 @@ Aptitude is an enhanced version of apt. APT is a lower level package manager and
 
 ## What is AppArmor
 A security module of the Linux kernel that allows the system administrator to restrict the capabilities of a program.
+```
+sudo aa-status
+```
 
 # Evaluation-MandatoryPart-[Simple setup]
 
