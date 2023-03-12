@@ -332,6 +332,7 @@ wall "	#Architecture: $arc
 ```
 
 - *wall
+
 displays a message, or the contents of a file, or otherwise its standard input, on the terminals of all currently logged in users. The command will wrap lines that are longer than 79 characters. Short lines are whitespace padded to have 79 characters. The command will always put a carriage return and new line at the end of each line.(控制格式)
 
 ## Crontab
