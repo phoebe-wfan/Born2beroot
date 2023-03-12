@@ -281,9 +281,6 @@ ssh -p 2222 root@localhost
 # Monitoring & Crontab 
 
 ## Monitoring
-```
-vim /home/monitoring.sh
-```
 - The architecture of your operating system and its kernel version.
 - The number of physical processors.
 - The number of virtual processors.
@@ -296,6 +293,46 @@ vim /home/monitoring.sh
 - The number of users using the server.
 - The IPv4 address of your server and its MAC (Media Access Control) address.
 - The number of commands executed with the sudo program.
+
+```
+vim /home/monitoring.sh
+```
+```
+#!/bin/bash
+arc=$(uname -a) #architecture (linux debian...)
+pcpu=$(grep "physical id" /proc/cpuinfo | sort | uniq | wc -l) #nbr physical cpu
+vcpu=$(grep "^processor" /proc/cpuinfo | wc -l) #nbr virtual cpu
+fram=$(free -m | awk '$1 == "Mem:" {print $2}') #memory total(memory内存)
+uram=$(free -m | awk '$1 == "Mem:" {print $3}') #memory used
+pram=$(free | awk '$1 == "Mem:" {printf("%.2f"), $3/$2*100}') #memory percentage(%)
+fdisk=$(df -Bg | grep '^/dev/' | grep -v '/boot$' | awk '{ft += $2} END {print ft}') #disk total(disk硬盘)
+udisk=$(df -Bm | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} END {print ut}') #disk used
+pdisk=$(df -Bm | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} {ft+= $2} END {printf("%d"), ut/ft*100}') #(%)
+cpul=$(top -bn1 | grep '^%Cpu' | cut -c 9- | xargs | awk '{printf("%.1f%%"), $1 + $3}') #(cpu使用率)cpu usage%
+lb=$(who -b | awk '$1 == "system" {print $3 " " $4}') #last boot date and time
+lvmt=$(lsblk | grep "lvm" | wc -l) #LVM active?
+lvmu=$(if [ $lvmt -eq 0 ]; then echo no; else echo yes; fi) 
+ctcp=$(cat /proc/net/sockstat{,6} | awk '$1 == "TCP:" {print $3}') #cat (tcp协议)
+ulog=$(users | wc -w) #nbr user log
+ip=$(hostname -I) #ipv4 address
+mac=$(ip link show | awk '$1 == "link/ether" {print $2}') #mac adress
+cmds=$(journalctl _COMM=sudo | grep COMMAND | wc -l) #nbr sudo commands
+wall "	#Architecture: $arc
+	#CPU physical: $pcpu
+	#vCPU: $vcpu
+	#Memory Usage: $uram/${fram}MB ($pram%)
+	#Disk Usage: $udisk/${fdisk}Gb ($pdisk%)
+	#CPU load: $cpul
+	#Last boot: $lb
+	#LVM use: $lvmu
+	#Connexions TCP: $ctcp ESTABLISHED
+	#User log: $ulog
+	#Network: IP $ip ($mac)
+	#Sudo: $cmds cmd" 
+```
+
+- *wall
+displays a message, or the contents of a file, or otherwise its standard input, on the terminals of all currently logged in users. The command will wrap lines that are longer than 79 characters. Short lines are whitespace padded to have 79 characters. The command will always put a carriage return and new line at the end of each line.(控制格式)
 
 ## Crontab
 - edit
