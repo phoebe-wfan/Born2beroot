@@ -271,7 +271,7 @@ sudo ufw status numbered
 - Delete this new rule
 delete:
 ```
-sudo ufw delete [rule nbr]
+sudo ufw delete [rule nbr] (no need [], just nbr)
 ```
 
 # Evaluation-MandatoryPart-[SSH]
