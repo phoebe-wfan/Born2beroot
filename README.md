@@ -238,6 +238,10 @@ UFW (Uncomplicated Firewall) is a software application responsible for ensuring 
 
 - Check that the UFW program is properly installed on the virtual machine
 ```
+which ufw
+```
+or
+```
 dpkg -s ufw
 ```
 
