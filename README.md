@@ -78,6 +78,20 @@ getent group user42
 ```
 sudo adduser newuser
 ```
+
+- *delete user/group
+```
+sudo delgroup newgroup
+```
+```
+sudo deluser newuser
+```
+
+- *check deluser/group
+```
+cd /home
+```
+
 - Befor that we had better to show the [Strong Password Policy]:
 ```
 sudo vim /etc/login.defs
