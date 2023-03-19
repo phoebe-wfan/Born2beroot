@@ -91,6 +91,7 @@ sudo deluser newuser
 ```
 cd /home
 ```
+- *[添加删除用户和组中文参考连接](https://blog.csdn.net/GMingZhou/article/details/78706439)
 
 - Befor that we had better to show the [Strong Password Policy]:
 ```
@@ -357,16 +358,20 @@ wall "	#Architecture: $arc
 displays a message, or the contents of a file, or otherwise its standard input, on the terminals of all currently logged in users. The command will wrap lines that are longer than 79 characters. Short lines are whitespace padded to have 79 characters. The command will always put a carriage return and new line at the end of each line.(控制格式)
 
 ## Crontab
-- edit
+- edit (10->1)
 ```
 sudo crontab -u root -e
 ```
 ```
 # m h  dom mon dow   command
-*/10 * * * * /home/monitoring.sh
+*/1 * * * * /home/monitoring.sh
 ```
-10 -> 1
-从10分钟一次变成1分钟一次
+- edit (10->never)
+```
+# m h  dom mon dow   command
+# */* * * * * /home/monitoring.sh
+```
+
 - cat
 ```
 sudo crontab -u root -l
@@ -391,3 +396,6 @@ apt install git
 ```
 bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 ```
+
+# *复制虚拟机
+[中文的](https://blog.csdn.net/luo15242208310/article/details/121581827)
